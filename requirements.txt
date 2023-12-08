@@ -1,0 +1,9 @@
+Flask==2.0.2
+gunicorn
+streamlit
+langchain
+streamlit_chat
+pymupdf
+sentence-transformers
+faiss-cpu
+llama-cpp-python
