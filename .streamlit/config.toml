@@ -1,0 +1,59 @@
+[global]
+# Global configuration for Streamlit app
+developmentMode = false
+dataFrameSerialization = "legacy"
+
+[server]
+# Server configuration
+port = 8501
+address = "localhost"
+baseUrlPath = ""
+enableCORS = false
+enableXsrfProtection = true
+maxUploadSize = 200
+maxMessageSize = 200
+enableWebsocketCompression = false
+enableStaticServing = true
+runOnSave = false
+allowRunOnSave = false
+
+[browser]
+# Browser configuration
+serverAddress = "localhost"
+gatherUsageStats = false
+serverPort = 8501
+
+[logger]
+# Logging configuration
+level = "info"
+messageFormat = "%(asctime)s.%(msecs)03d %(name)s: %(levelname)s: %(message)s"
+
+[client]
+# Client configuration
+caching = true
+displayEnabled = true
+showErrorDetails = true
+toolbarMode = "auto"
+
+[runner]
+# Runner configuration
+magicEnabled = true
+installTracer = false
+fixMatplotlib = true
+postScriptGC = true
+fastReruns = true
+enforceSerializableSessionState = true
+
+[theme]
+# Theme configuration
+primaryColor = "#667eea"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f0f2f6"
+textColor = "#262730"
+font = "sans serif"
+
+[ui]
+# UI configuration
+hideTopBar = false
+hideSidebarNav = false
+showPadding = true
