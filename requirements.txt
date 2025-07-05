@@ -1,9 +1,75 @@
-Flask==2.0.2
-gunicorn
-streamlit
-langchain
-streamlit_chat
-pymupdf
-sentence-transformers
-faiss-cpu
-llama-cpp-python
+# Streamlit Frontend Requirements
+streamlit>=1.28.0
+streamlit-chat>=0.1.1
+streamlit-option-menu>=0.3.6
+
+# PDF Processing
+PyPDF2>=3.0.1
+pdfplumber>=0.9.0
+pymupdf>=1.23.0
+
+# AI and NLP
+openai>=1.3.0
+anthropic>=0.7.0
+langchain>=0.1.0
+langchain-openai>=0.0.5
+langchain-anthropic>=0.0.1
+
+# Vector Database
+chromadb>=0.4.0
+faiss-cpu>=1.7.4
+pinecone-client>=2.2.4
+
+# Text Processing
+sentence-transformers>=2.2.2
+tiktoken>=0.5.2
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Web Framework
+fastapi>=0.104.0
+uvicorn>=0.24.0
+python-multipart>=0.0.6
+
+# File Handling
+python-magic>=0.4.27
+python-docx>=0.8.11
+openpyxl>=3.1.0
+
+# Async Support
+asyncio>=3.4.3
+aiofiles>=23.2.0
+
+# Logging and Monitoring
+loguru>=0.7.2
+prometheus-client>=0.19.0
+
+# Security
+python-jose>=3.3.0
+passlib>=1.7.4
+bcrypt>=4.1.0
+cryptography>=41.0.0
+bleach>=6.1.0
+
+# Environment Management
+python-dotenv>=1.0.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# Testing (for development)
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+httpx>=0.25.0
+
+# Development Tools
+black>=23.0.0
+flake8>=6.1.0
+mypy>=1.7.0
+pre-commit>=3.6.0
+
+# Optional: For enhanced UI
+plotly>=5.17.0
+altair>=5.2.0
+streamlit-aggrid>=0.3.4
+streamlit-folium>=0.15.0
