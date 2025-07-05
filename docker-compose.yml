@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  # Main Streamlit Application
+  streamlit-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-pdf-chat-frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - APP_ENV=production
+      - CHROMA_HOST=chromadb
+      - CHROMA_PORT=8000
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./logs:/app/logs
+      - ./vector_db:/app/vector_db
+      - ./uploads:/app/uploads
+      - ./temp:/app/temp
+    depends_on:
+      - chromadb
+      - redis
+    restart: unless-stopped
+    networks:
+      - ai-pdf-chat-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ChromaDB Vector Database
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: ai-pdf-chat-chromadb
+    ports:
+      - "8000:8000"
+    volumes:
+      - chromadb_data:/chroma/chroma
+    environment:
+      - CHROMA_SERVER_HOST=0.0.0.0
+      - CHROMA_SERVER_HTTP_PORT=8000
+    restart: unless-stopped
+    networks:
+      - ai-pdf-chat-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis for Session Storage and Rate Limiting
+  redis:
+    image: redis:7-alpine
+    container_name: ai-pdf-chat-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-defaultpassword}
+    restart: unless-stopped
+    networks:
+      - ai-pdf-chat-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  chromadb_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  ai-pdf-chat-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
